@@ -1,0 +1,32 @@
+ULCKLOADDER V1 - pacote atualizado
+
+ARQUIVOS
+- ULCKLOADDER_V1.py: código-fonte atualizado.
+- ulckloadder.ico: ícone criado a partir da imagem enviada.
+- build_ulckloadder.bat: script para gerar o executável no Windows.
+
+COMO GERAR O EXE
+1. Extraia todos os arquivos do ZIP para a mesma pasta.
+2. No Windows, dê dois cliques em build_ulckloadder.bat.
+3. Aguarde a instalação do PyInstaller e a compilação.
+4. O executável será criado em dist\ULCKLOADDER_V1.exe.
+
+ALTERAÇÕES
+- Extensão .json corrigida na Auditoria de arquivos.
+- Pesquisa ao digitar mantida e otimizada com pequeno debounce.
+- Ícone personalizado configurado para o EXE e para a janela.
+- Novo atalho amarelo Arquivos suspeitos, como sétimo tile na tela Resumo.
+- Triagem somente leitura: nomes solicitados, faixa de tamanho 6–8 MB,
+  conteúdo JSON, extensões executáveis/scripts, SHA-256 e histórico local de
+  detecções do Microsoft Defender quando acessível.
+
+LIMITAÇÕES IMPORTANTES
+- A análise é heurística; nome, extensão e tamanho isolados não provam malware.
+- O SHA-256 é calculado localmente, mas não é consultado em serviços online.
+- O histórico do Defender depende de o Microsoft Defender estar disponível e
+  permitir a consulta local. Ausência de histórico não significa arquivo seguro.
+- A varredura inicial cobre Downloads, Desktop, Documents, Temp e pastas Roblox
+  do perfil do usuário. Use Adicionar pasta ou Todas as unidades para ampliar.
+- A varredura não apaga, coloca em quarentena, executa nem modifica arquivos.
+- O pacote não contém um EXE Windows pronto: a compilação precisa ser feita no
+  Windows com o arquivo BAT incluído.
