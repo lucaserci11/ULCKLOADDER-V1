@@ -1,14 +1,38 @@
-@echo off
-setlocal
-cd /d "%~dp0"
-python -m pip install --upgrade pyinstaller
-python -m PyInstaller --noconfirm --clean --onefile --windowed --name ULCKLOADDER_V1 --icon "ulckloadder.ico" --add-data "ulckloadder.ico;." "ULCKLOADDER_V1.py"
-if errorlevel 1 (
-  echo.
-  echo Falha ao compilar. Confira as mensagens acima.
-  pause
-  exit /b 1
-)
-echo.
-echo EXE criado em: dist\ULCKLOADDER_V1.exe
-pause
+
+name: Build ULCKLOADDER_V1
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Baixar código
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Instalar PyInstaller
+        run: python -m pip install pyinstaller
+
+      - name: Compilar EXE
+        run: >
+          python -m PyInstaller --noconfirm --clean --onefile --windowed
+          --name ULCKLOADDER_V1
+          --icon ulckloadder.ico
+          --add-data "ulckloadder.ico;."
+          ULCKLOADDER_V1.py
+
+      - name: Disponibilizar EXE
+        uses: actions/upload-artifact@v4
+        with:
+          name: ULCKLOADDER_V1
+          path: dist/ULCKLOADDER_V1.exe
